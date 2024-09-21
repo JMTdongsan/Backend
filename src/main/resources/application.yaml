@@ -1,0 +1,50 @@
+spring:
+  application:
+    name: demo
+  datasource:
+    driver-class-name: ${db.mysql.driver-class-name}
+    url: ${db.mysql.url}
+    username: ${db.mysql.username}
+    password: ${db.mysql.password}
+  data:
+    mongodb:
+      uri: ${db.mongodb.uri}
+      database: ${db.mongodb.database}
+  config:
+    import: application-db.yaml, application-jwt.yaml, application-auth.yaml
+  jpa:
+    hibernate:
+      ddl-auto: update
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    properties:
+      hibernate:
+        dialect: ${db.properties.dialect}
+  security:
+    oauth2:
+      client:
+        provider:
+          naver:
+            authorization-uri: ${naver.authorization-uri}
+            token-uri: ${naver.token-uri}
+            user-info-uri: ${naver.user-info-uri}
+            user-name-attribute: ${naver.user-name-attribute}
+        registration:
+          naver:
+            client-name: ${naver.client-name}
+            client-id: ${naver.client-id}
+            client-secret: ${naver.client-secret}
+            redirect-uri: ${naver.redirect-uri}
+            authorization-grant-type: ${naver.authorization-grant-type}
+            scope: ${naver.scope}
+          google:
+            client-name: ${google.client-id}
+            client-id: ${google.client-id}
+            client-secret: ${google.client-secret}
+            redirect-uri: ${google.redirect-uri}
+            authorization-grant-type: ${google.authorization-grant-type}
+            scope: ${google.scope}
+
+logging:
+  level:
+    root: info
