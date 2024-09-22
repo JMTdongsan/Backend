@@ -11,12 +11,14 @@ import com.matdongsan.demo.mysql.domain.Member;
 import com.matdongsan.demo.mysql.repository.ChatRoomRepository;
 import com.matdongsan.demo.mysql.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.UUID;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class ChatService {
@@ -39,6 +41,7 @@ public class ChatService {
                 .build();
 
         ChatRoom savedChatRoom = chatRoomRepository.save(chatRoom);
+        log.info("User makes chatRoom. / username: {} / chatRoom: {}", creator.getUsername(), chatRoom);
 
         return new CreateChatRoomResponse(savedChatRoom.getChatRoomId());
     }
