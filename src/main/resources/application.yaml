@@ -11,7 +11,7 @@ spring:
       uri: ${db.mongodb.uri}
       database: ${db.mongodb.database}
   config:
-    import: application-db.yaml, application-jwt.yaml, application-auth.yaml
+    import: application-db.yaml, application-jwt.yaml, application-auth.yaml, application-openAi.yaml
   jpa:
     hibernate:
       ddl-auto: update

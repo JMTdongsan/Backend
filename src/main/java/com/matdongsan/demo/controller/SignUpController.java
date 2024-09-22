@@ -1,8 +1,8 @@
 package com.matdongsan.demo.controller;
 
-import com.matdongsan.demo.dto.request.SignUpRequest;
-import com.matdongsan.demo.dto.response.SignUpResponse;
-import com.matdongsan.demo.service.SignUpService;
+import com.matdongsan.demo.dto.request.member.SignUpRequest;
+import com.matdongsan.demo.dto.response.member.SignUpResponse;
+import com.matdongsan.demo.service.memberservice.SignUpService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

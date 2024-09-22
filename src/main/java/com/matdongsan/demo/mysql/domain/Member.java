@@ -1,5 +1,6 @@
 package com.matdongsan.demo.mysql.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.lang.NonNull;
@@ -36,6 +37,7 @@ public class Member {
     @Column(name = "email")
     private String email;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "creator")
     private List<ChatRoom> chatRooms = new ArrayList<>();
 }

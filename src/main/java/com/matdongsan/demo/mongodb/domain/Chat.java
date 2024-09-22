@@ -4,7 +4,7 @@ import jakarta.persistence.Id;
 import lombok.*;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collation = "chat")
+@Document(collection = "chat")
 @Getter
 @Setter
 @Builder
@@ -13,9 +13,10 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Chat {
 
     @Id
-    private Long id;
-    private Long memberId;
-    private String roomId;
+    private String id;
+    private int memberId;
+    private String chatRoomId;
+    private String role;
     private String message;
     private String date;
 }
