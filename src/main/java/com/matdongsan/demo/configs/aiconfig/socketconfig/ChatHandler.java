@@ -15,10 +15,10 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+@Slf4j
 @RequiredArgsConstructor
 public class ChatHandler extends TextWebSocketHandler {
 
-    private final Logger log = LoggerFactory.getLogger(getClass());
     private final ConcurrentHashMap<String, WebSocketSession> sessions = new ConcurrentHashMap<>();
     private final ChatBotService chatBotService;
 
@@ -36,14 +36,14 @@ public class ChatHandler extends TextWebSocketHandler {
         String username = (String) payload.get("username");
         String userMessage = (String) payload.get("message");
 
-        log.info("user send message to chatRoom({}) / message: {} / username: {}", chatRoomId, userMessage, username);
+        log.info("User send message to chatRoom. / message: {} / username: {} / chatRoom: {}", userMessage, username, chatRoomId);
 
         SaveChatRequest userRequest = new SaveChatRequest(chatRoomId, "user", userMessage, username);
         chatBotService.saveChatMessage(userRequest);
 
         String responseMessage = chatBotService.getChatbotResponse(userMessage);
 
-        log.info("bot send message to chatRoom({}) / message: {}", chatRoomId, responseMessage);
+        log.info("Bot send message to chatRoom. / message: {} / chatRoom: {}", responseMessage, chatRoomId);
 
         SaveChatRequest chatBotRequest = new SaveChatRequest(chatRoomId, "bot", responseMessage, username);
         chatBotService.saveChatMessage(chatBotRequest);
