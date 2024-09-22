@@ -38,6 +38,7 @@ public class Member {
     private String email;
 
     @JsonIgnore
+    @Builder.Default
     @OneToMany(mappedBy = "creator")
     private List<ChatRoom> chatRooms = new ArrayList<>();
 }
