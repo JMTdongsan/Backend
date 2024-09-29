@@ -1,5 +1,6 @@
 package com.matdongsan.demo.configs.aiconfig;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,7 +13,8 @@ public class OpenAiConfig {
     private String openAiKey;
 
     @Bean
-    public RestTemplate template() {
+    @Qualifier("openAiTemplate")
+    public RestTemplate openAiTemplate() {
         RestTemplate restTemplate = new RestTemplate();
 
         restTemplate.getInterceptors().add((request, body, execution) -> {
