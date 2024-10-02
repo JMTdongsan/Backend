@@ -2,6 +2,7 @@ package com.matdongsan.demo.configs.securityconfig.jwt;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.matdongsan.demo.dto.request.member.LoginRequest;
+import com.matdongsan.demo.dto.response.member.LoginResponse;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.ServletInputStream;
@@ -42,9 +43,8 @@ public class CustomUsernamePasswordAuthenticationFilter extends UsernamePassword
         if (username == null & password == null) {
             LoginRequest loginRequest = new LoginRequest();
 
-            ServletInputStream inputStream = null;
             try {
-                inputStream = request.getInputStream();
+                ServletInputStream inputStream = request.getInputStream();
                 String messageBody = StreamUtils.copyToString(inputStream, StandardCharsets.UTF_8);
 
                 loginRequest = objectMapper.readValue(messageBody, LoginRequest.class);
@@ -80,6 +80,7 @@ public class CustomUsernamePasswordAuthenticationFilter extends UsernamePassword
         String token = jwtUtils.createToken(username, role);
 
         response.addHeader(AUTHORIZATION_HEADER, "Bearer " + token);
+        response.getWriter().write(objectMapper.writeValueAsString(new LoginResponse("Bearer "+token)));
     }
 
     @Override

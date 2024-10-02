@@ -6,6 +6,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -17,10 +18,10 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import java.io.IOException;
 import java.util.Arrays;
 
+@Slf4j
 @RequiredArgsConstructor
 public class JwtFilter extends OncePerRequestFilter {
 
-    private static final Logger logger = LoggerFactory.getLogger(JwtFilter.class);
     private static final String AUTHORIZATION_HEADER = "Authorization";
     private final JwtUtils jwtUtils;
 
@@ -29,9 +30,13 @@ public class JwtFilter extends OncePerRequestFilter {
 
         String bearerToken = request.getHeader(AUTHORIZATION_HEADER);
 
+        if (!StringUtils.hasText(bearerToken)) {
+            bearerToken = request.getParameter("token");
+        }
+
         if (!StringUtils.hasText(bearerToken) || !bearerToken.startsWith("Bearer ")) {
 
-            logger.info("토큰이 null이거나 jwt 토큰이 아닙니다.");
+            log.info("토큰이 null이거나 jwt 토큰이 아닙니다.");
             filterChain.doFilter(request, response);
             return;
         }
@@ -40,7 +45,7 @@ public class JwtFilter extends OncePerRequestFilter {
 
         if (jwtUtils.isExpired(token)) {
 
-            logger.info("토큰의 유효 기간이 만료되었습니다.");
+            log.info("토큰의 유효 기간이 만료되었습니다.");
             filterChain.doFilter(request, response);
             return;
         }
