@@ -41,7 +41,7 @@ public class ChatHandler extends TextWebSocketHandler {
         SaveChatRequest userRequest = new SaveChatRequest(chatRoomId, "user", userMessage, username);
         chatBotService.saveChatMessage(userRequest);
 
-        String responseMessage = chatBotService.getChatbotResponse(userMessage);
+        String responseMessage = chatBotService.getChatBotResponse(userMessage);
 
         log.info("Bot send message to chatRoom. / message: {} / chatRoom: {}", responseMessage, chatRoomId);
 
