@@ -9,6 +9,7 @@ build/
 application-auth.yaml
 application-db.yaml
 application-jwt.yaml
+application-ai.yaml
 
 ### STS ###
 .apt_generated
