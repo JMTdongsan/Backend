@@ -1,7 +1,6 @@
 package com.matdongsan.demo.controller;
 
 import com.matdongsan.demo.dto.request.chat.CreateChatRoomRequest;
-import com.matdongsan.demo.dto.request.chat.GetAllChatsFromChatRoomRequest;
 import com.matdongsan.demo.dto.request.openAi.OpenAiRequest;
 import com.matdongsan.demo.dto.response.chat.CreateChatRoomResponse;
 import com.matdongsan.demo.dto.response.chat.GetAllChatsFromChatRoomResponse;
@@ -9,7 +8,6 @@ import com.matdongsan.demo.dto.response.openAi.OpenAiResponse;
 import com.matdongsan.demo.service.chatservice.ChatBotService;
 import com.matdongsan.demo.service.chatservice.ChatService;
 import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;

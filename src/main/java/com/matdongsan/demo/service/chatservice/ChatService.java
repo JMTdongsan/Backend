@@ -1,7 +1,6 @@
 package com.matdongsan.demo.service.chatservice;
 
 import com.matdongsan.demo.dto.request.chat.CreateChatRoomRequest;
-import com.matdongsan.demo.dto.request.chat.GetAllChatsFromChatRoomRequest;
 import com.matdongsan.demo.dto.response.chat.CreateChatRoomResponse;
 import com.matdongsan.demo.dto.response.chat.GetAllChatsFromChatRoomResponse;
 import com.matdongsan.demo.mongodb.domain.Chat;
