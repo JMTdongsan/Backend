@@ -60,8 +60,8 @@ public class ChatBotService {
         String encodedMessage = URLEncoder.encode(message, "UTF-8");
 
         URI uri = UriComponentsBuilder
-                .fromUriString("http://dmslab.iptime.org:5000")
-                .path("api/ask")
+                .fromUriString(aiUrl)
+                .path(aiPath)
                 .queryParam("question", encodedMessage)
                 .build()
                 .toUri();
