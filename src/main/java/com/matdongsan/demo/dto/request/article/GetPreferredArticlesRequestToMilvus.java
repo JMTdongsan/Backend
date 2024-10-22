@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class GetSimilarArticlesRequest {
+public class GetPreferredArticlesRequestToMilvus {
 
-    private String articleId;
+    private String userPreferenceVector;
 }

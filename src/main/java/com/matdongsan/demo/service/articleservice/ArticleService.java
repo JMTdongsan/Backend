@@ -2,6 +2,7 @@ package com.matdongsan.demo.service.articleservice;
 
 
 import com.matdongsan.demo.dto.request.article.GetPreferredArticlesRequest;
+import com.matdongsan.demo.dto.request.article.GetPreferredArticlesRequestToMilvus;
 import com.matdongsan.demo.dto.response.article.GetPreferredArticlesResponse;
 import com.matdongsan.demo.mysql.domain.Member;
 import com.matdongsan.demo.mysql.repository.MemberRepository;
@@ -10,8 +11,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -29,11 +28,10 @@ public class ArticleService {
         );
 
         RestTemplate restTemplate = new RestTemplate();
-        List<Float> preferenceVector = member.getPreferenceVectorList();
 
         ResponseEntity<GetPreferredArticlesResponse> response = restTemplate.postForEntity(
                 articleServerURI+"/get_preferred_articles",
-                preferenceVector,
+                new GetPreferredArticlesRequestToMilvus(member.getPreferenceVector()),
                 GetPreferredArticlesResponse.class);
 
         return response;
