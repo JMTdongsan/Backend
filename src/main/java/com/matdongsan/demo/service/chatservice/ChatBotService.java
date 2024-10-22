@@ -31,10 +31,10 @@ public class ChatBotService {
     @Value("${openai.api.url}")
     private String openAiApiUrl;
 
-    @Value("ai.url")
+    @Value("${ai.url}")
     private String aiUrl;
 
-    @Value("ai.path")
+    @Value("${ai.path}")
     private String aiPath;
 
     private final RestTemplate openAiTemplate;
