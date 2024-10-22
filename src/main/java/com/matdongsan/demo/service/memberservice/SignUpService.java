@@ -9,6 +9,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class SignUpService {
@@ -33,6 +36,14 @@ public class SignUpService {
                 .password(passwordEncoder.encode(request.getPassword()))
                 .role("ROLE_USER")
                 .build();
+
+        List<Float> preferenceVector = new ArrayList<>();
+
+        for (int i=0; i<1024; i++) {
+            preferenceVector.add(0.0f);
+        }
+
+        member.setPreferenceVector(preferenceVector);
 
         memberRepository.save(member);
 
