@@ -9,5 +9,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class AdjustUserPreferenceRequest {
 
+    private String username;
     private String articleId;
 }
