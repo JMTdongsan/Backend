@@ -41,3 +41,5 @@ out/
 
 ### VS Code ###
 .vscode/
+config.py
+test.py
