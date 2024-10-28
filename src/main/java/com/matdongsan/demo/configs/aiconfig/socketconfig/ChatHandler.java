@@ -21,6 +21,7 @@ public class ChatHandler extends TextWebSocketHandler {
 
     private final ConcurrentHashMap<String, WebSocketSession> sessions = new ConcurrentHashMap<>();
     private final ChatBotService chatBotService;
+    private final String chatBotErrorMessage = "요청중 오류가 발생했습니다. 다시 요청해주세요.";
 
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
@@ -41,14 +42,20 @@ public class ChatHandler extends TextWebSocketHandler {
         SaveChatRequest userRequest = new SaveChatRequest(chatRoomId, "user", userMessage, username);
         chatBotService.saveChatMessage(userRequest);
 
-        String responseMessage = chatBotService.getChatBotResponse(userMessage);
+        String responseMessage;
 
-        log.info("Bot send message to chatRoom. / message: {} / chatRoom: {}", responseMessage, chatRoomId);
-
-        SaveChatRequest chatBotRequest = new SaveChatRequest(chatRoomId, "bot", responseMessage, username);
-        chatBotService.saveChatMessage(chatBotRequest);
-
-        session.sendMessage(new TextMessage(responseMessage));
+        try {
+            responseMessage = chatBotService.getChatBotResponse(userMessage);
+            log.info("Bot send message to chatRoom. / message: {} / chatRoom: {}", responseMessage, chatRoomId);
+            SaveChatRequest chatBotRequest = new SaveChatRequest(chatRoomId, "bot", responseMessage, username);
+            chatBotService.saveChatMessage(chatBotRequest);
+            session.sendMessage(new TextMessage(responseMessage));
+        } catch (Exception e) {
+            log.info("Error: {}", e.toString());
+            SaveChatRequest chatBotRequest = new SaveChatRequest(chatRoomId, "bot", chatBotErrorMessage, username);
+            chatBotService.saveChatMessage(chatBotRequest);
+            session.sendMessage(new TextMessage(chatBotErrorMessage));
+        }
     }
 
     @Override

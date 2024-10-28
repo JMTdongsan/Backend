@@ -1,8 +1,7 @@
 package com.matdongsan.demo.controller;
 
-import com.matdongsan.demo.dto.request.article.GetPreferredArticlesRequest;
-import com.matdongsan.demo.dto.request.article.GetSimilarArticlesRequest;
-import com.matdongsan.demo.dto.request.article.GetSimilarArticlesRequestToMilvus;
+import com.matdongsan.demo.dto.request.article.*;
+import com.matdongsan.demo.dto.response.article.GetArticleResponse;
 import com.matdongsan.demo.dto.response.article.GetPreferredArticlesResponse;
 import com.matdongsan.demo.dto.response.article.GetSimilarArticlesResponse;
 import com.matdongsan.demo.dto.response.article.GetSomeArticlesResponse;
@@ -43,5 +42,13 @@ public class ArticleController {
     public ResponseEntity<GetPreferredArticlesResponse> getPreferredArticles(@Valid @RequestBody GetPreferredArticlesRequest request) {
 
         return articleService.getPreferredArticles(request);
+    }
+
+    @PostMapping("/getArticle")
+    public ResponseEntity<GetArticleResponse> getArticle(@Valid @RequestBody GetArticleRequest request) {
+
+        return new RestTemplate().postForEntity(articleServerURI+"/get_article",
+                new GetArticleRequestToMilvus(request.getArticleId()),
+                GetArticleResponse.class);
     }
 }

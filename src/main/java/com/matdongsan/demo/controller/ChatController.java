@@ -60,4 +60,9 @@ public class ChatController {
     public ResponseEntity<CreateChatRoomResponse> createChatRoom(@Valid @RequestBody CreateChatRoomRequest request) {
         return ResponseEntity.ok(chatService.createChatRoom(request));
     }
+
+    @GetMapping("/deleteAllChats")
+    public void deleteAllChats() {
+        chatService.deleteAllChats();
+    }
 }

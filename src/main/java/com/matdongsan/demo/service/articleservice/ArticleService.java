@@ -1,8 +1,10 @@
 package com.matdongsan.demo.service.articleservice;
 
 
+import com.matdongsan.demo.dto.request.article.GetArticleRequest;
 import com.matdongsan.demo.dto.request.article.GetPreferredArticlesRequest;
 import com.matdongsan.demo.dto.request.article.GetPreferredArticlesRequestToMilvus;
+import com.matdongsan.demo.dto.response.article.GetArticleResponse;
 import com.matdongsan.demo.dto.response.article.GetPreferredArticlesResponse;
 import com.matdongsan.demo.mysql.domain.Member;
 import com.matdongsan.demo.mysql.repository.MemberRepository;

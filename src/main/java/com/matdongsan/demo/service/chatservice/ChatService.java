@@ -1,6 +1,7 @@
 package com.matdongsan.demo.service.chatservice;
 
 import com.matdongsan.demo.dto.request.chat.CreateChatRoomRequest;
+import com.matdongsan.demo.dto.request.chat.DeleteChatsByChatRoomIdRequest;
 import com.matdongsan.demo.dto.response.chat.CreateChatRoomResponse;
 import com.matdongsan.demo.dto.response.chat.GetAllChatsFromChatRoomResponse;
 import com.matdongsan.demo.mongodb.domain.Chat;
@@ -50,5 +51,11 @@ public class ChatService {
 
         List<Chat> chats = chatRepository.findAllByChatRoomId(chatRoomId);
         return new GetAllChatsFromChatRoomResponse(chats);
+    }
+
+    @Transactional
+    public void deleteAllChats() {
+
+        chatRepository.deleteAll();
     }
 }
